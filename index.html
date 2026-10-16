@@ -927,77 +927,92 @@
     }
 
     function renderDigestiveTractSVG() {
+      // Recreates the uploaded image diagram with numbers 1 to 7 replacing labels
       return `
         <svg class="interactive-svg" viewBox="0 0 340 320" width="320">
           <!-- Meisje silhouet -->
-          <ellipse cx="170" cy="30" rx="22" ry="26" fill="#fde047" opacity="0.3"/>
+          <ellipse cx="170" cy="30" rx="22" ry="26" fill="#fde047" opacity="0.3"/> <!-- Haar -->
           <path d="M 170 8 C 150 8, 138 25, 142 55 C 145 70, 150 80, 150 90 L 190 90 C 190 80, 195 70, 198 55 C 202 25, 190 8, 170 8 Z" fill="#b45309" opacity="0.45"/>
-          <ellipse cx="170" cy="32" rx="20" ry="24" fill="#fed7aa"/>
+          <ellipse cx="170" cy="32" rx="20" ry="24" fill="#fed7aa"/> <!-- Hoofd -->
           
           <!-- Lichaam omtrek -->
           <path d="M 135 70 C 120 100, 115 200, 125 300 L 215 300 C 225 200, 220 100, 205 70 Z" fill="#ffedd5" stroke="#f97316" stroke-width="1.5" opacity="0.6"/>
 
           <!-- 1: MOND -->
           <ellipse cx="174" cy="40" rx="5" ry="3" fill="#dc2626"/>
+          <!-- Line 1 -->
           <line x1="174" y1="40" x2="230" y2="40" stroke="#334155" stroke-width="2"/>
           <circle cx="174" cy="40" r="3" fill="#334155"/>
 
           <!-- 2: SLOKDARM -->
           <path d="M 172 43 L 172 135" stroke="#c2410c" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <!-- Line 2 -->
           <line x1="172" y1="85" x2="230" y2="85" stroke="#334155" stroke-width="2"/>
           <circle cx="172" cy="85" r="3" fill="#334155"/>
 
-          <!-- 3: LEVER -->
+          <!-- 3: LEVER (Donkerbruin, links op scherm) -->
           <path d="M 138 132 C 140 125, 168 125, 172 138 C 170 162, 145 165, 138 132 Z" fill="#6b21a8" opacity="0.85"/>
+          <!-- Line 3 -->
           <line x1="148" y1="145" x2="230" y2="130" stroke="#334155" stroke-width="2"/>
           <circle cx="148" y1="145" r="3" fill="#334155"/>
 
-          <!-- 4: MAAG -->
+          <!-- 4: MAAG (Lichtroze/bruin, rechts op scherm) -->
           <path d="M 170 135 C 178 132, 192 138, 190 152 C 185 162, 170 158, 170 135 Z" fill="#f97316"/>
+          <!-- Line 4 -->
           <line x1="182" y1="146" x2="230" y2="146" stroke="#334155" stroke-width="2"/>
           <circle cx="182" cy="146" r="3" fill="#334155"/>
 
-          <!-- 5: DIKKE DARM -->
+          <!-- 5: DIKKE DARM (Grijze kader-darm) -->
           <path d="M 142 225 L 142 165 C 142 158, 198 158, 198 165 L 198 230" fill="none" stroke="#64748b" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+          <!-- Line 5 -->
           <line x1="198" y1="168" x2="230" y2="168" stroke="#334155" stroke-width="2"/>
           <circle cx="198" cy="168" r="3" fill="#334155"/>
 
-          <!-- 6: DUNNE DARM -->
+          <!-- 6: DUNNE DARM (Kronkelende binnenin) -->
           <rect x="150" y="172" width="40" height="48" rx="10" fill="#fdba74" stroke="#ea580c" stroke-width="2"/>
           <path d="M 152 180 Q 170 185, 188 180 Q 170 195, 152 200 Q 170 210, 188 205" fill="none" stroke="#c2410c" stroke-width="2"/>
+          <!-- Line 6 -->
           <line x1="175" y1="195" x2="230" y2="195" stroke="#334155" stroke-width="2"/>
           <circle cx="175" cy="195" r="3" fill="#334155"/>
 
           <!-- 7: ANUS -->
           <rect x="166" y="234" width="8" height="14" fill="#475569" rx="2"/>
+          <!-- Line 7 -->
           <line x1="170" y1="240" x2="230" y2="240" stroke="#334155" stroke-width="2"/>
           <circle cx="170" cy="240" r="3" fill="#334155"/>
 
-          <!-- NUMMER BADGES 1 t/m 7 -->
+          <!-- NUMMER BADGES 1 t/m 7 AAN DE RECHTERKANT (VERVANGT DE NAMEN) -->
+          <!-- 1: Mond -->
           <g class="number-badge-target" onclick="clickNumberBadge('1')">
             <circle cx="248" cy="40" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="44" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">1</text>
           </g>
+          <!-- 2: Slokdarm -->
           <g class="number-badge-target" onclick="clickNumberBadge('2')">
             <circle cx="248" cy="85" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="89" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">2</text>
           </g>
+          <!-- 3: Lever -->
           <g class="number-badge-target" onclick="clickNumberBadge('3')">
             <circle cx="248" cy="130" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="134" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">3</text>
           </g>
+          <!-- 4: Maag -->
           <g class="number-badge-target" onclick="clickNumberBadge('4')">
             <circle cx="248" cy="146" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="150" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">4</text>
           </g>
+          <!-- 5: Dikke darm -->
           <g class="number-badge-target" onclick="clickNumberBadge('5')">
             <circle cx="248" cy="168" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="172" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">5</text>
           </g>
+          <!-- 6: Dunne darm -->
           <g class="number-badge-target" onclick="clickNumberBadge('6')">
             <circle cx="248" cy="195" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="199" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">6</text>
           </g>
+          <!-- 7: Anus -->
           <g class="number-badge-target" onclick="clickNumberBadge('7')">
             <circle cx="248" cy="240" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="244" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">7</text>
@@ -1022,6 +1037,7 @@
       const isCorrect = (chosenNum === currentQuestion.correctNumber);
       const feedbackBox = document.getElementById('feedbackBox');
 
+      // Schakel alle knoppen uit zodat er niet dubbel geklikt kan worden
       document.querySelectorAll('.option-btn').forEach(b => b.style.pointerEvents = 'none');
 
       if (isCorrect) {
@@ -1041,6 +1057,7 @@
         feedbackBox.innerHTML = `<strong>Tip:</strong> ${currentQuestion.hint}`;
       }
 
+      // Knoop om sluiten en PAS NA NIEUWE VIS weer een vraag te krijgen
       document.getElementById('nextBtn').style.display = 'inline-flex';
     }
 
@@ -1048,6 +1065,7 @@
       isOverlayActive = false;
       document.getElementById('questionOverlay').classList.remove('active');
       
+      // Hengel terugzetten in ruststand
       fishingLine.active = false;
       fishingLine.state = 'idle';
     }

@@ -724,15 +724,15 @@
 
       if (fishingLine.active) {
         if (fishingLine.state === 'descending') {
-          fishingLine.hookX += (fishingLine.targetX - fishingLine.hookX) * 0.14;
-          fishingLine.hookY += (fishingLine.targetY - fishingLine.hookY) * 0.14;
+          fishingLine.hookX += (fishingLine.targetX - fishingLine.hookX) * 0.2;
+          fishingLine.hookY += (fishingLine.targetY - fishingLine.hookY) * 0.2;
 
-          if (Math.hypot(fishingLine.targetX - fishingLine.hookX, fishingLine.targetY - fishingLine.hookY) < 4) {
+          if (Math.hypot(fishingLine.targetX - fishingLine.hookX, fishingLine.targetY - fishingLine.hookY) < 6) {
             fishingLine.state = 'ascending';
           }
         } else if (fishingLine.state === 'ascending') {
-          fishingLine.hookX += (rodTipX - fishingLine.hookX) * 0.09;
-          fishingLine.hookY += (rodTipY + 30 - fishingLine.hookY) * 0.09;
+          fishingLine.hookX += (rodTipX - fishingLine.hookX) * 0.15;
+          fishingLine.hookY += (rodTipY + 30 - fishingLine.hookY) * 0.15;
 
           if (Math.hypot(rodTipX - fishingLine.hookX, (rodTipY + 30) - fishingLine.hookY) < 8) {
             fishingLine.active = false;
@@ -755,7 +755,7 @@
         // Check fish collision
         fishes.forEach((fish, idx) => {
           const dist = Math.hypot(fish.x - fishingLine.hookX, fish.y - fishingLine.hookY);
-          if (dist < 36 && !isOverlayActive) {
+          if (dist < 45 && !isOverlayActive) {
             fishes.splice(idx, 1);
             spawnFish();
             fishingLine.active = false;
@@ -883,8 +883,11 @@
       if (isOverlayActive) return;
 
       const rect = canvas.getBoundingClientRect();
-      const clickX = evt.clientX - rect.left;
-      const clickY = evt.clientY - rect.top;
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      const clickX = (evt.clientX - rect.left) * scaleX;
+      const clickY = (evt.clientY - rect.top) * scaleY;
 
       fishingLine.active = true;
       fishingLine.state = 'descending';
@@ -927,7 +930,6 @@
     }
 
     function renderDigestiveTractSVG() {
-      // Recreates the uploaded image diagram with numbers 1 to 7 replacing labels
       return `
         <svg class="interactive-svg" viewBox="0 0 340 320" width="320">
           <!-- Meisje silhouet -->
@@ -981,38 +983,31 @@
           <line x1="170" y1="240" x2="230" y2="240" stroke="#334155" stroke-width="2"/>
           <circle cx="170" cy="240" r="3" fill="#334155"/>
 
-          <!-- NUMMER BADGES 1 t/m 7 AAN DE RECHTERKANT (VERVANGT DE NAMEN) -->
-          <!-- 1: Mond -->
+          <!-- NUMMER BADGES 1 t/m 7 AAN DE RECHTERKANT -->
           <g class="number-badge-target" onclick="clickNumberBadge('1')">
             <circle cx="248" cy="40" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="44" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">1</text>
           </g>
-          <!-- 2: Slokdarm -->
           <g class="number-badge-target" onclick="clickNumberBadge('2')">
             <circle cx="248" cy="85" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="89" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">2</text>
           </g>
-          <!-- 3: Lever -->
           <g class="number-badge-target" onclick="clickNumberBadge('3')">
             <circle cx="248" cy="130" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="134" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">3</text>
           </g>
-          <!-- 4: Maag -->
           <g class="number-badge-target" onclick="clickNumberBadge('4')">
             <circle cx="248" cy="146" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="150" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">4</text>
           </g>
-          <!-- 5: Dikke darm -->
           <g class="number-badge-target" onclick="clickNumberBadge('5')">
             <circle cx="248" cy="168" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="172" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">5</text>
           </g>
-          <!-- 6: Dunne darm -->
           <g class="number-badge-target" onclick="clickNumberBadge('6')">
             <circle cx="248" cy="195" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="199" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">6</text>
           </g>
-          <!-- 7: Anus -->
           <g class="number-badge-target" onclick="clickNumberBadge('7')">
             <circle cx="248" cy="240" r="13" fill="#3a5343" stroke="#ffffff" stroke-width="2"/>
             <text x="248" y="244" fill="#ffffff" font-size="13" font-weight="bold" text-anchor="middle">7</text>
@@ -1037,7 +1032,6 @@
       const isCorrect = (chosenNum === currentQuestion.correctNumber);
       const feedbackBox = document.getElementById('feedbackBox');
 
-      // Schakel alle knoppen uit zodat er niet dubbel geklikt kan worden
       document.querySelectorAll('.option-btn').forEach(b => b.style.pointerEvents = 'none');
 
       if (isCorrect) {
@@ -1057,7 +1051,6 @@
         feedbackBox.innerHTML = `<strong>Tip:</strong> ${currentQuestion.hint}`;
       }
 
-      // Knoop om sluiten en PAS NA NIEUWE VIS weer een vraag te krijgen
       document.getElementById('nextBtn').style.display = 'inline-flex';
     }
 
